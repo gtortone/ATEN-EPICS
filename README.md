@@ -29,12 +29,6 @@ PV defined in ATEN-PDU.db
 | $(PDU):o$(OUTLET):power  | VA      | R |
 
 
-   * $(PDU):o$(OUTLET):name
-   * $(PDU):o$(OUTLET):status
-   * $(PDU):o$(OUTLET):voltage
-   * $(PDU):o$(OUTLET):current
-   * $(PDU):o$(OUTLET):power
-   
 CA Access Security
 ------------------
    
