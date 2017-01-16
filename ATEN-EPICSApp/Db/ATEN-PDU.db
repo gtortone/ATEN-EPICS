@@ -1,0 +1,120 @@
+#
+# PDU global metrics
+#
+
+record(ai, "$(PDU):temperature") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "degC")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::sensorTemperature.1 \" 100 F")
+}
+
+record(ai, "$(PDU):humidity") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "RH%")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::sensorHumidity.1 \" 100 F")
+}
+
+record(ai, "$(PDU):voltage") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "V")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::deviceVoltage.1 \" 100 F")
+}
+
+record(ai, "$(PDU):current") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "A")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::deviceCurrent.1 \" 100 F")
+}
+
+record(ai, "$(PDU):power") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "VA")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::devicePower.1 \" 100 F")
+}
+
+#
+# PDU outlets metrics
+#
+
+record(stringin, "$(PDU):o$(OUTLET):name") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::outletName.$(OUTLET) STRING: 100 S")
+}
+
+record(mbbo, "$(PDU):o$(OUTLET)") {
+  field(OUT,  "$(PDU):o$(OUTLET):_setstatus")
+  field(ONST, "off")
+  field(TWST, "on")
+  field(THST, "pending")
+  field(FLNK, "$(PDU):o$(OUTLET):_setstatus")
+}
+
+record(ao, "$(PDU):o$(OUTLET):_setstatus") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "Passive")
+  field(OUT, "@$(PDU) n0npublic ATEN-PE-CFG::outlet$(OUTLET)Status.0 INTEGER 100 i")
+}
+
+record(mbbi, "$(PDU):o$(OUTLET):status") {
+  field(INP,  "$(PDU):o$(OUTLET):_getstatus")
+  field(PINI, "YES")
+  field(ONST, "off")
+  field(TWST, "on")
+  field(THST, "pending")
+  field(FLNK, "$(PDU):o$(OUTLET):_getstatus")
+}
+
+record(ai, "$(PDU):o$(OUTLET):_getstatus") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "Passive")
+  field(SCAN, "1 second")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::outlet$(OUTLET)Status.0 ( 100 i")
+  field(FLNK, "$(PDU):o$(OUTLET):status")
+}
+
+record(ai, "$(PDU):o$(OUTLET):voltage") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "V")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::outletVoltage.$(OUTLET) \" 100 F")
+}
+
+record(ai, "$(PDU):o$(OUTLET):current") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "A")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::outletCurrent.$(OUTLET) \" 100 F")
+}
+
+record(ai, "$(PDU):o$(OUTLET):power") {
+  field(DESC, "SNMP channel")
+  field(DTYP, "Snmp")
+  field(SCAN, "1 second")
+  field(EGU, "VA")
+  field(PREC, "2")
+  field(INP, "@$(PDU) n0npublic ATEN-PE-CFG::outletPower.$(OUTLET) \" 100 F")
+}
+

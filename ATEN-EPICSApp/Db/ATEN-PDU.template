@@ -1,0 +1,13 @@
+file db/ATEN-PDU.db
+{
+pattern
+{ OUTLET  }
+{ 1 }
+{ 2 }
+{ 3 }
+{ 4 }
+{ 5 }
+{ 6 }
+{ 7 }
+{ 8 }
+}
